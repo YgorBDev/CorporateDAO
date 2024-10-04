@@ -1,0 +1,303 @@
+package apresentacao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import persistencia/BancoDeDados;
+
+public class Main {
+
+	public static void main(String[] args) {
+		try {
+			Scanner teclado = new Scanner(System.in);
+			
+			BancoDeDados bd = new BancoDeDados();
+
+			while (true) {
+				
+				System.out.println("\n== Cadastro Empresarial ==");
+				System.out.println("1) Cadastrar uma Empresa");
+				System.out.println("2) Mostrar Empresas Cadastradas");
+				System.out.println("3) Contratar Funcionarios");
+				System.out.println("4) Mostrar Contratos ");
+				System.out.println("5) Declarar Impostos");
+				System.out.println("6) Mostrar Declaraçoes");
+				System.out.println("7) Opção Secret");
+				
+				System.out.print("Escolha uma opção: ");
+				int opcao = teclado.nextInt();
+				teclado.nextLine();
+
+				if (opcao == 1) {
+					
+					System.out.print("\nDigite o nome da empresa: ");
+					String nome_empresa = teclado.nextLine();
+					System.out.print("\nDigite o lugar da empresa: ");
+					String lugar = teclado.nextLine();
+					System.out.print("Digite o CNPJ da empresa: ");
+					String CNPJ = teclado.nextLine();
+					System.out.print("Digite a data de criação da empresa (YYYY-MM-DD): ");
+					String data_criacao = teclado.nextLine();
+					System.out.print("\nDigite o lucro bruto da empresa: ");
+					String lucro_bruto = teclado.nextLine();
+					System.out.print("\nDigite o lucro liquido da empresa: ");
+					String lucro_liquido = teclado.nextLine();
+					System.out.print("\nDigite o imposto pago pela empresa: ");
+					String imposto = teclado.nextLine();
+			
+					Empresa e = new Empresa(nome_empresa, lugar, CNPJ, data_criacao, lucro_bruto, lucro_liquido, imposto);
+					try {
+						bd.armazenarEmpresa(e);
+					} catch (SQLIntegrityConstraintViolationException e) {
+					
+						System.out.println("\n*** Esse CNPJ já foi cadastrado!");
+						continue;
+					}
+					System.out.println("\nUsuário cadastrado com sucesso!");
+				}
+				
+				else if (opcao == 2) {
+					ArrayList<Empresa> lista = bd.getEmpresa();
+					if (lista.size() == 0) {
+						System.out.println("\nO cadastro está vazio.");
+					} else {
+						System.out.println("\nPessoas cadastradas:");
+						for (Empresa e: lista) {
+							System.out.println(e);
+						}
+					}
+				}
+				
+				
+        adicionarEmpresas(conn, "Tech Solutions", "123.456/0001-95", "São Paulo", "2015-04-01", 200000.00, 150000.00, 20000.00, "ativa");
+        
+        listarEmpresas(conn);
+        
+        adicionarFuncionario(conn, "Roberta Costa", "454.563.908.22", "2005-05-15", "Estagiaria", 2000.00, "66611112222", "2024-01-10", "ativo");
+        
+        listarFuncionarios(conn);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    	}
+    }
+}package model;
+
+public class Empresa {
+
+	private String nome_empresa;
+	private String CNPJ;
+	private String Lugar;
+	private String data_criacao;
+	private Double lucro_bruto;
+	private Double lucro_liquido;
+	private Double imposto;
+	
+	
+	public Empresa(String nome_empresa, String CNPJ, String data_criacao, String Lugar, Double lucro_bruto, Double lucro_liquido, Double imposto  ) {
+		this.nome_empresa = nome_empresa;
+		this.CNPJ = CNPJ;
+		this.Lugar = Lugar;
+		this.data_criacao = data_criacao;
+		this.lucro_bruto = lucro_bruto;
+		this.lucro_liquido = lucro_liquido;
+		this.imposto = imposto;
+		
+	}
+	
+	@Override
+	public String toString() {
+		return this.nome_empresa + ", CNPJ: " + this.CNPJ + ", Criação: " + data_criacao + ", Lugar: " ;
+	}
+
+	public String getnome_empresa() {
+		return nome_empresa;
+	}
+	public void setnome_empresa(String nome_empresa) {
+		this.nome_empresa = nome_empresa;
+	}
+	public String getCNPJ() {
+		return CNPJ;
+	}
+	public void setCNPJ(String CNPJ) {
+		this.CNPJ = CNPJ;
+	}
+	public String getdata_criacao() {
+		return data_criacao;
+	}
+	public void setdata_criacao(String data_criacao) {
+		this.data_criacao = data_criacao;
+	}
+}
+
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class listarFuncionarios {
+
+	private static void listarFuncionarios(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM funcionario";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                System.out.println("Funcionário: " + rs.getString("nome") + ", CPF: " + rs.getString("cpf"));
+            }
+        }
+	}	
+}
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class adicionarFuncionario {
+
+    private static void adicionarFuncionario(Connection conn, String nome, String cpf, String dataNasc, String cargo, double salario, String celular, String dataAdmissao, String status) throws SQLException {
+        String sql = "INSERT INTO funcionario (nome, cpf, data_nasc, cargo, salario, celular, data_admissao, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nome);
+            pstmt.setString(2, cpf);
+            pstmt.setString(3, dataNasc);
+            pstmt.setString(4, cargo);
+            pstmt.setDouble(5, salario);
+            pstmt.setString(6, celular);
+            pstmt.setString(7, dataAdmissao);
+            pstmt.setString(8, status);
+            pstmt.executeUpdate();
+            System.out.println("Funcionário adicionado com sucesso!");
+        }
+    }
+}
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class BancoDeDados {
+    private static final String URL = "jdbc:mysql://localhost:3306/bd_integrador";
+    private static final String USER = "root"; 
+    private static final String PASSWORD = "root"; 
+
+
+    public static void main(String[] args) {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            System.out.println("Conexão estabelecida com sucesso!");
+            
+            adicionarEmpresas(conn, "Tech Solutions", "123.456/0001-95", "São Paulo", "2015-04-01", 200000.00, 150000.00, 20000.00, "ativa");
+            
+            listarEmpresas(conn);
+            
+            adicionarFuncionario(conn, "Roberta Costa", "454.563.908.22", "2005-05-15", "Estagiaria", 2000.00, "66611112222", "2024-01-10", "ativo");
+            
+            listarFuncionarios(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void adicionarEmpresas(Connection conn, String nome, String cnpj, String lugar, String data_criacao, double lucro_bruto, double lucro_liquido, double imposto, String status) throws SQLException {
+        String sql = "INSERT INTO funcionario (nome, cpf, data_nasc, cargo, salario, celular, data_admissao, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nome);
+            pstmt.setString(2, cnpj);
+            pstmt.setString(3, lugar);
+            pstmt.setString(4, data_criacao);
+            pstmt.setDouble(5, lucro_bruto);
+            pstmt.setDouble(6, lucro_liquido);
+            pstmt.setDouble(7, imposto);
+            pstmt.setString(8, status);
+            pstmt.executeUpdate();
+            System.out.println("Funcionário adicionado com sucesso!");
+        }
+    }
+    
+    private static void listarEmpresas(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM empresa";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                System.out.println("Empresa: " + rs.getString("nome") + ", CNPJ: " + rs.getString("cnpj"));
+            }
+        }
+    }
+
+    private static void adicionarFuncionario(Connection conn, String nome, String cpf, String dataNasc, String cargo, double salario, String celular, String dataAdmissao, String status) throws SQLException {
+        String sql = "INSERT INTO funcionario (nome, cpf, data_nasc, cargo, salario, celular, data_admissao, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nome);
+            pstmt.setString(2, cpf);
+            pstmt.setString(3, dataNasc);
+            pstmt.setString(4, cargo);
+            pstmt.setDouble(5, salario);
+            pstmt.setString(6, celular);
+            pstmt.setString(7, dataAdmissao);
+            pstmt.setString(8, status);
+            pstmt.executeUpdate();
+            System.out.println("Funcionário adicionado com sucesso!");
+        }
+    }
+
+    private static void listarFuncionarios(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM funcionario";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                System.out.println("Funcionário: " + rs.getString("nome") + ", CPF: " + rs.getString("cpf"));
+            }
+        }
+    }
+}
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class listarEmpresas {
+
+	private static void listarEmpresas(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM empresa";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                System.out.println("Empresa: " + rs.getString("nome") + ", CNPJ: " + rs.getString("cnpj"));
+            }
+        }
+    }
+
+}
+package persistencia;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class adicionarEmpresas {
+
+	  private static void adicionarEmpresas(Connection conn, String nome, String cnpj, String lugar, String data_criacao, double lucro_bruto, double lucro_liquido, double imposto, String status) throws SQLException {
+	        String sql = "INSERT INTO funcionario (nome, cpf, data_nasc, cargo, salario, celular, data_admissao, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+	            pstmt.setString(1, nome);
+	            pstmt.setString(2, cnpj);
+	            pstmt.setString(3, lugar);
+	            pstmt.setString(4, data_criacao);
+	            pstmt.setDouble(5, lucro_bruto);
+	            pstmt.setDouble(6, lucro_liquido);
+	            pstmt.setDouble(7, imposto);
+	            pstmt.setString(8, status);
+	            pstmt.executeUpdate();
+	            System.out.println("Funcionário adicionado com sucesso!");
+	        }
+	    }
+}
