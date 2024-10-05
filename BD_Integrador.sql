@@ -2,16 +2,6 @@ DROP DATABASE IF EXISTS bd_integrador;
 CREATE DATABASE bd_integrador; 
 USE bd_integrador;
 
-/* CREATE TABLE funcionario2 (
-	id BIGINT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT
-);
-
-CREATE TABLE empresa2 (
-	id BIGINT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
-    id_funcionario NOT NULL UNIQUE,
-    FOREIGN KEY (id_funcionario) REFERENCES funcionario(id)
-); */
-
 CREATE TABLE funcionario (
     id_funcionario BIGINT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
     nome_funcionario VARCHAR(50) NOT NULL unique,
