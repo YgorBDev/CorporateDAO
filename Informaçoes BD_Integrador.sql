@@ -1,3 +1,4 @@
+USE bd_integrador;
 INSERT INTO funcionario (nome_funcionario, cpf, data_nasc, cargo, salario, celular, data_admissao, status) VALUES
 ('João Silva', '123.456.789-01', '1985-06-15', 'Gerente', 5000.00, '11987654321', '2020-01-10', 'ativo'),
 ('Maria Oliveira', '987.654.321-00', '1990-12-22', 'Analista', 3500.00, '11912345678', '2021-03-15', 'ativo'),
