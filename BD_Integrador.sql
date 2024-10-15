@@ -11,7 +11,7 @@ CREATE TABLE empresa (
     lucro_bruto DECIMAL(15, 2) NOT NULL, 
     lucro_liquido DOUBLE, 
     imposto DOUBLE, 
-    qta_funcionario INT NOT NULL,
+    qta_funcionario INT,
     status ENUM('ativa', 'inativa') DEFAULT 'ativa'
 );
 
@@ -50,4 +50,3 @@ select*from empresa;
 select*from funcionario;
 select*from imposto;
 select*from paga;
-
