@@ -18,7 +18,7 @@ CREATE TABLE empresa (
 CREATE TABLE funcionario (
     id_funcionario INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
     id_empresa INT,
-    nome_funcionario VARCHAR(50) NOT ,
+    nome_funcionario VARCHAR(50) NOT NULL,
     cpf CHAR(14) NOT NULL UNIQUE,
     valor_imposto DOUBLE,
     data_nasc DATE NOT NULL,
