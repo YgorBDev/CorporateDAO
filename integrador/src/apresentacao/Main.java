@@ -31,10 +31,16 @@ public class Main {
 						String nomeEmpresa = teclado.nextLine();
 						System.out.print("Digite o CNPJ da Empresa: ");
 						String cnpj = teclado.nextLine();
-						System.out.print("Digite a data de criação da Empresa (YYYY-MM-DD): ");
+						System.out.print("Digite a data de criação da empresa: ");
 						String dataCriacao = teclado.nextLine();
-			
-						Empresa e = new Empresa(nomeEmpresa, cnpj, dataCriacao, dataCriacao, opcao, opcao, opcao, opcao, null);
+						System.out.print("Informe o local da empresa: ");
+						String lugar = teclado.nextLine();
+						System.out.print("Digite o lucro bruto da sua empresa: ");
+						Double lucroBruto = teclado.nextDouble();
+						System.out.print("Digite o número de funcionários da sua empresa: ");
+						Double qtdeFuncionario = teclado.nextDouble();
+						
+						Empresa e = new Empresa(nomeEmpresa, cnpj, dataCriacao, dataCriacao, lucroBruto, qtdeFuncionario, null);
 						EmpresaDAO ed = new EmpresaDAO();
 						ed.create(e);
 					} catch (SQLIntegrityConstraintViolationException e) {

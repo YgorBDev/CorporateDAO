@@ -5,25 +5,24 @@ public class Empresa {
 	    private String cnpj;          
 	    private String lugar;         
 	    private String dataCriacao;      
-	    private double lucroBruto;    
-	    private double lucroLiquido;   
-	    private double imposto;       
-	    private int qtdeFuncionario;   
+	    private Double lucroBruto;    
+	    private Double lucroLiquido;   
+	    private Double imposto;       
+	    private Double qtdeFuncionario;   
 	    private Status status; 
-
-public Empresa(String nomeEmpresa, String cnpj, String lugar, String dataCriacao,double lucroBruto, double lucroLiquido, double imposto, int qtdeFuncionario, Status status) {
-	
+	    
+	    public Empresa(String nomeEmpresa, String cnpj, String lugar, String dataCriacao,Double lucroBruto, Double qtdeFuncionario, Status status) {
+	    	
 	        this.nomeEmpresa = nomeEmpresa;
 	        this.cnpj = cnpj;
 	        this.lugar = lugar;
 	        this.dataCriacao = dataCriacao;
 	        this.lucroBruto = lucroBruto;
-	        this.lucroLiquido = lucroLiquido;
-	        this.imposto = imposto;
 	        this.qtdeFuncionario = qtdeFuncionario;
 	        this.status = status;
 
 	    }
+
 
 		public String getNomeEmpresa() {
 	        return nomeEmpresa;
@@ -57,35 +56,35 @@ public Empresa(String nomeEmpresa, String cnpj, String lugar, String dataCriacao
 	        this.dataCriacao = dataCriacao;
 	    }
 
-	    public double getLucroBruto() {
+	    public Double getLucroBruto() {
 	        return lucroBruto;
 	    }
 
-	    public void setLucroBruto(double lucroBruto) {
+	    public void setLucroBruto(Double lucroBruto) {
 	        this.lucroBruto = lucroBruto;
 	    }
 
-	    public double getLucroLiquido() {
+	    public Double getLucroLiquido() {
 	        return lucroLiquido;
 	    }
 
-	    public void setLucroLiquido(double lucroLiquido) {
+	    public void setLucroLiquido(Double lucroLiquido) {
 	        this.lucroLiquido = lucroLiquido;
 	    }
 
-	    public double getImposto() {
+	    public Double getImposto() {
 	       return imposto;
 	    }
 
-	    public void setImposto(double imposto) {
+	    public void setImposto(Double imposto) {
 	        this.imposto = imposto;
 	    }
 	    
-	    public int getQtdeFuncionario() {
+	    public Double getQtdeFuncionario() {
 	        return qtdeFuncionario;
 	    }
 
-	    public void setQtdeFuncionario(int qtdeFuncionario) {
+	    public void setQtdeFuncionario(Double qtdeFuncionario) {
 	        this.qtdeFuncionario = qtdeFuncionario;
 	    }
 

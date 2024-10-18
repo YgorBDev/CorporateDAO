@@ -26,7 +26,7 @@ public class EmpresaDAO {
             st.setDouble(5, e.getLucroBruto());
             st.setDouble(6, e.getLucroLiquido());
             st.setDouble(7, e.getImposto());
-            st.setInt(8, e.getQtdeFuncionario());
+            st.setDouble(8, e.getQtdeFuncionario());
             st.executeUpdate();
         }
     }
@@ -41,13 +41,11 @@ public class EmpresaDAO {
                 String cnpj = res.getString("cnpj");
                 String dataCriacao = res.getString("dataCriacao");
                 String lugar = res.getString("lugar");
-                double lucroBruto = res.getDouble("lucroBruto");
-                double lucroLiquido = res.getDouble("lucroLiquido");
-                double imposto = res.getDouble("imposto");
-                int qtdeFuncionario = res.getInt("qtdeFuncionario");
+                Double lucroBruto = res.getDouble("lucroBruto");
+                Double qtdeFuncionario = res.getDouble("qtdeFuncionario");
                 Status status = Status.valueOf(res.getString("status")); // Ensure Status is an enum
 
-                Empresa e = new Empresa(nomeEmpresa, cnpj, dataCriacao, lugar, lucroBruto, lucroLiquido, imposto, qtdeFuncionario, status);
+                Empresa e = new Empresa(nomeEmpresa, cnpj, dataCriacao, lugar, lucroBruto, qtdeFuncionario, status);
                 lista.add(e);
             }
         }
@@ -63,7 +61,7 @@ public class EmpresaDAO {
             st.setDouble(4, e.getLucroBruto());
             st.setDouble(5, e.getLucroLiquido());
             st.setDouble(6, e.getImposto());
-            st.setInt(7, e.getQtdeFuncionario());
+            st.setDouble(7, e.getQtdeFuncionario());
             st.setString(8, e.getCnpj());
             st.executeUpdate();
         }
@@ -88,13 +86,13 @@ public class EmpresaDAO {
                     String cnpj = res.getString("cnpj");
                     String dataCriacao = res.getString("dataCriacao");
                     String lugar = res.getString("lugar");
-                    double lucroBruto = res.getDouble("lucroBruto");
-                    double lucroLiquido = res.getDouble("lucroLiquido");
-                    double imposto = res.getDouble("imposto");
-                    int qtdeFuncionario = res.getInt("qtdeFuncionario");
+                    Double lucroBruto = res.getDouble("lucroBruto");
+                    Double lucroLiquido = res.getDouble("lucroLiquido");
+                    Double imposto = res.getDouble("imposto");
+                    Double qtdeFuncionario = res.getDouble("qtdeFuncionario");
                     Status status = Status.valueOf(res.getString("status")); // Ensure Status is an enum
 
-                    Empresa e = new Empresa(nomeEmpresa, cnpj, dataCriacao, lugar, lucroBruto, lucroLiquido, imposto, qtdeFuncionario, status);
+                    Empresa e = new Empresa(nomeEmpresa, cnpj, dataCriacao, lugar, lucroBruto, qtdeFuncionario, status);
                     lista.add(e);
                 }
             }
