@@ -6,13 +6,12 @@ CREATE TABLE empresa (
     id_empresa INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
     nome_empresa VARCHAR(255) NOT NULL,
     cnpj CHAR(15) NOT NULL UNIQUE,
-    lugar VARCHAR(255) NOT NULL UNIQUE,
-    data_criacao DATE NOT NULL,
-    lucro_bruto DECIMAL(15, 2) NOT NULL, 
+    lugar VARCHAR(255),
+    data_criacao VARCHAR(255),
+	qta_funcionario DOUBLE, 
+	lucro_bruto DOUBLE, 
     lucro_liquido DOUBLE, 
-    imposto DOUBLE, 
-    qta_funcionario INT,
-    status ENUM('ativa', 'inativa') DEFAULT 'ativa'
+    imposto DOUBLE
 );
 
 CREATE TABLE funcionario (
@@ -21,12 +20,11 @@ CREATE TABLE funcionario (
     nome_funcionario VARCHAR(50) NOT NULL,
     cpf CHAR(14) NOT NULL UNIQUE,
     valor_imposto DOUBLE,
-    data_nasc DATE NOT NULL,
+    data_nasc VARCHAR(50) NOT NULL,
     cargo VARCHAR(50) NOT NULL,
-    salario DECIMAL(10, 2) NOT NULL,  
-    celular VARCHAR(15) NOT NULL UNIQUE,     
-    data_admissao DATE NOT NULL,
-    status ENUM('ativo', 'inativo') DEFAULT 'ativo',
+    salario DOUBLE NOT NULL,  
+    celular VARCHAR(15) NOT NULL,     
+    data_admissao VARCHAR(15) NOT NULL,
     FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
 
