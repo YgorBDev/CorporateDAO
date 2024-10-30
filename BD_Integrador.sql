@@ -3,7 +3,7 @@ CREATE DATABASE bd_integrador;
 USE bd_integrador;
 
 CREATE TABLE empresa (
-    id_empresa INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    id_empresa DOUBLE PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
     nomeEmpresa VARCHAR(255) NOT NULL,
     cnpj CHAR(15) NOT NULL UNIQUE,
     lugar VARCHAR(255),
@@ -15,8 +15,8 @@ CREATE TABLE empresa (
 );
 
 CREATE TABLE funcionario (
-    id_funcionario INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
-    id_empresa INT,
+    id_funcionario DOUBLE PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    id_empresa DOUBLE,
     nome_funcionario VARCHAR(50) NOT NULL,
     cpf CHAR(14) NOT NULL UNIQUE,
     valor_imposto DOUBLE,
@@ -25,26 +25,27 @@ CREATE TABLE funcionario (
     salario DOUBLE NOT NULL,  
     celular VARCHAR(15) NOT NULL,     
     data_admissao VARCHAR(15) NOT NULL,
-    	FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
 
 CREATE TABLE imposto (
-    id_imposto INT PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
-    id_empresa INT,
+    id_imposto DOUBLE PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
+    id_empresa DOUBLE,
     ano INT NOT NULL,
     imposto DOUBLE, 
     data_declaracao DATE NOT NULL
 );
 
 create table paga(
-    id_paga INT PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
-    id_empresa INT,
-    id_imposto INT,
-	FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
-	FOREIGN KEY (id_imposto) REFERENCES imposto(id_imposto)
+    id_paga DOUBLE PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
+    id_empresa DOUBLE,
+    id_imposto DOUBLE,
+    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
+    FOREIGN KEY (id_imposto) REFERENCES imposto(id_imposto)
 );
 
 select*from empresa;
 select*from funcionario;
 select*from imposto;
 select*from paga;
+
