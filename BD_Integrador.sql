@@ -4,13 +4,13 @@ USE bd_integrador;
 
 CREATE TABLE empresa (
     id_empresa INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
-    nome_empresa VARCHAR(255) NOT NULL,
+    nomeEmpresa VARCHAR(255) NOT NULL,
     cnpj CHAR(15) NOT NULL UNIQUE,
     lugar VARCHAR(255),
-    data_criacao VARCHAR(255),
-	qta_funcionario DOUBLE, 
-	lucro_bruto DOUBLE, 
-    lucro_liquido DOUBLE, 
+    dataCriacao VARCHAR(255),
+    qtdeFuncionario DOUBLE, 
+    lucroBruto DOUBLE, 
+    lucroLiquido DOUBLE, 
     imposto DOUBLE
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE funcionario (
     salario DOUBLE NOT NULL,  
     celular VARCHAR(15) NOT NULL,     
     data_admissao VARCHAR(15) NOT NULL,
-    FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
+    	FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa)
 );
 
 CREATE TABLE imposto (
@@ -37,7 +37,7 @@ CREATE TABLE imposto (
 );
 
 create table paga(
-	id_paga INT PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
+    id_paga INT PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
     id_empresa INT,
     id_imposto INT,
 	FOREIGN KEY (id_empresa) REFERENCES empresa(id_empresa),
