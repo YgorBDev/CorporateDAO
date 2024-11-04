@@ -10,8 +10,7 @@ CREATE TABLE empresa (
     dataCriacao VARCHAR(255),
     qtdeFuncionario DOUBLE, 
     lucroBruto DOUBLE, 
-    lucroLiquido DOUBLE, 
-    imposto DOUBLE
+    lucroLiquido DOUBLE
 );
 
 CREATE TABLE funcionario (
@@ -19,7 +18,6 @@ CREATE TABLE funcionario (
     idEmpresa DOUBLE,
     nomeFuncionario VARCHAR(50) NOT NULL,
     cpf CHAR(14) NOT NULL UNIQUE,
-    valorImposto DOUBLE,
     dataNasc VARCHAR(50) NOT NULL,
     cargo VARCHAR(50) NOT NULL,
     salario DOUBLE NOT NULL,  
