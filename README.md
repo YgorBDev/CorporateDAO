@@ -1,5 +1,3 @@
-Aqui está um **README.md** adaptado para o seu projeto **DAO: Sistema para Cadastro de Empresa e Gestão Financeira**, com base no código fornecido:
-
 ---
 
 # 📊 **DAO: Sistema para Cadastro de Empresa e Gestão Financeira**
@@ -178,5 +176,3 @@ Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICEN
 - **Email:** ygorb.dev@gmail.com
 
 ---
-
-Esse README é completo e cobre todos os aspectos do seu projeto. Se precisar de mais ajustes ou adicionar mais detalhes, é só avisar! 😊
